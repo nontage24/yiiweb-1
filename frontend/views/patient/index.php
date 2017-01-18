@@ -15,10 +15,10 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="patient-index">
 
 
-<?php // echo $this->render('_search', ['model' => $searchModel]);  ?>
+    <?php // echo $this->render('_search', ['model' => $searchModel]);  ?>
 
     <p>
-    <?= Html::a('<i class="glyphicon glyphicon-plus"></i> เพิ่ม', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('<i class="glyphicon glyphicon-plus"></i> เพิ่ม', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
     <?=
     GridView::widget([
@@ -39,7 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'birth',
                 'filterType' => GridView::FILTER_DATE,
-                'filterWidgetOptions' => [                    
+                'filterWidgetOptions' => [
                     'pluginOptions' => [
                         'format' => 'yyyy-mm-dd',
                         'todayHighlight' => true
@@ -52,6 +52,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => 'cchangwat.changwatname',
                 'filter' => ArrayHelper::map(CChangwat::find()->all(), 'changwatcode', 'changwatname'),
                 'filterType' => GridView::FILTER_SELECT2,
+                'filterWidgetOptions' => [
+                    'pluginOptions' => ['allowClear' => true],
+                ],
+                'filterInputOptions' => ['placeholder' => ''],
                 'headerOptions' => ['style' => 'width:20%'],
             ],
             // 'district',
@@ -73,7 +77,7 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'discharge',
             // 'cm_id',
             // 'cg_id',
-            // 'adl',
+            'adl',
             // 'tai',
             // 'class_id',
             // 'class_name',
