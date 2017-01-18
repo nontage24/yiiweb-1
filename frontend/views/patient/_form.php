@@ -134,14 +134,15 @@ use yii\helpers\Url;
 <?php
 $route_get_amp = Url::toRoute('ajax/getamp');
 $js = <<<JS
+        
 $('#patient-province').change(function(){
    $('#patient-district').empty()
    $('#patient-district').append($('<option>').text('เลือก').attr('value',''));
     var p=$(this).val();
     $.ajax({
-        url:'$route_get_amp'+'&q='+p,
+        url:'$route_get_amp',
         type:'POST',
-        //data: '&q=' + p,
+        data: 'q=' + p,
         dataType: 'json',
         success: function( json ) {
             $.each(json, function(code, value) {
