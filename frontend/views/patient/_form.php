@@ -2,10 +2,9 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-
-/* @var $this yii\web\View */
-/* @var $model frontend\models\Patient */
-/* @var $form yii\widgets\ActiveForm */
+use yii\helpers\ArrayHelper;
+use frontend\models\CPrename;
+use kartik\widgets\Select2;
 ?>
 
 <div class="patient-form">
@@ -17,7 +16,19 @@ use yii\widgets\ActiveForm;
             <?= $form->field($model, 'cid')->textInput(['maxlength' => true]) ?>
         </div>
         <div class="col-md-2">
-            <?= $form->field($model, 'prename')->textInput(['maxlength' => true]) ?>
+            <?php
+            $mPrename = CPrename::find()->all();
+            $items = ArrayHelper::map($mPrename, 'prename', 'prename');
+            ?>
+            <?=
+            $form->field($model, 'prename')->widget(Select2::className(), [
+                'data' => $items,
+                'options' => ['placeholder' => 'เลือก ...'],
+                'pluginOptions' => [
+                    'allowClear' => true
+                ],
+            ])
+            ?>
         </div>
         <div class="col-md-4">
             <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
