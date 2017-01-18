@@ -49,7 +49,9 @@ use kartik\date\DatePicker;
                 'pluginOptions' => [
                     'autoclose' => true,
                     'format' => 'yyyy-mm-dd'
-                ]
+                ],
+                 'language' => 'th',
+                 
             ])
             ?>
         </div>
