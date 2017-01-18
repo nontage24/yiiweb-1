@@ -5,6 +5,7 @@ use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 use frontend\models\CPrename;
 use kartik\widgets\Select2;
+use kartik\date\DatePicker;
 ?>
 
 <div class="patient-form">
@@ -26,7 +27,7 @@ use kartik\widgets\Select2;
                 'options' => ['placeholder' => 'เลือก ...'],
                 'pluginOptions' => [
                     'allowClear' => true
-                ],//
+                ], //
             ])
             ?>
         </div>
@@ -43,13 +44,20 @@ use kartik\widgets\Select2;
             <?= $form->field($model, 'sex')->textInput(['maxlength' => true]) ?>
         </div>
         <div class="col-md-3">
-            <?= $form->field($model, 'birth')->textInput() ?>
+            <?=
+            $form->field($model, 'birth')->widget(DatePicker::className(), [
+                'pluginOptions' => [
+                    'autoclose' => true,
+                    'format' => 'yyyy-mm-dd'
+                ]
+            ])
+            ?>
         </div>
         <div class="col-md-3">
             <?= $form->field($model, 'province')->textInput(['maxlength' => true]) ?>
         </div>
         <div class="col-md-3">
-            <?= $form->field($model, 'district')->textInput(['maxlength' => true]) ?>
+<?= $form->field($model, 'district')->textInput(['maxlength' => true]) ?>
         </div>
 
     </div>
@@ -65,7 +73,7 @@ use kartik\widgets\Select2;
             <?= $form->field($model, 'village_name')->textInput(['maxlength' => true]) ?>
         </div>
         <div class="col-md-3">
-            <?= $form->field($model, 'house_no')->textInput(['maxlength' => true]) ?>
+<?= $form->field($model, 'house_no')->textInput(['maxlength' => true]) ?>
         </div>
     </div>
 
@@ -74,7 +82,7 @@ use kartik\widgets\Select2;
             <?= $form->field($model, 'lat')->textInput(['maxlength' => true]) ?>
         </div>
         <div class="col-md-6">
-            <?= $form->field($model, 'lon')->textInput(['maxlength' => true]) ?>
+<?= $form->field($model, 'lon')->textInput(['maxlength' => true]) ?>
         </div>
     </div>
 
@@ -93,7 +101,7 @@ use kartik\widgets\Select2;
             <?= $form->field($model, 'religion')->textInput(['maxlength' => true]) ?>
         </div>
         <div class="col-md-2">
-            <?= $form->field($model, 'mstatus')->textInput(['maxlength' => true]) ?>
+<?= $form->field($model, 'mstatus')->textInput(['maxlength' => true]) ?>
         </div>
     </div>
 
@@ -101,10 +109,10 @@ use kartik\widgets\Select2;
 
     <div class="form-group">
         <div class="col-md-6">
-            <?= Html::submitButton($model->isNewRecord ? 'เพิ่ม' : 'บันทึก', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+<?= Html::submitButton($model->isNewRecord ? 'เพิ่ม' : 'บันทึก', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
         </div>
     </div>
 
-    <?php ActiveForm::end(); ?>
+<?php ActiveForm::end(); ?>
 
 </div>
