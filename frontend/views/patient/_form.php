@@ -26,7 +26,7 @@ use kartik\widgets\Select2;
                 'options' => ['placeholder' => 'เลือก ...'],
                 'pluginOptions' => [
                     'allowClear' => true
-                ],
+                ],//
             ])
             ?>
         </div>
