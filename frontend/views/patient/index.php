@@ -24,6 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
     GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+        'floatHeader'=>TRUE,
         'formatter' => ['class' => 'yii\i18n\Formatter', 'nullDisplay' => '-'],
         'panel' => [
             'before' => 'รายการชื่อผู้ป่วย'
