@@ -3,6 +3,7 @@
 namespace frontend\models;
 
 use Yii;
+use frontend\models\CChangwat;
 
 /**
  * This is the model class for table "patient".
@@ -113,5 +114,10 @@ class Patient extends \yii\db\ActiveRecord
             'tel' => 'Tel',
             'dupdate' => 'Dupdate',
         ];
+    }
+    
+     public function getCchangwat(){
+        return $this->hasOne(CChangwat::className(), ['changwatcode' => 'province']);
+        
     }
 }
