@@ -7,6 +7,8 @@ use frontend\models\CPrename;
 use kartik\widgets\Select2;
 use kartik\date\DatePicker;
 use frontend\models\CChangwat;
+use frontend\models\CAmpur;
+use frontend\models\CTambon;
 use yii\helpers\Url;
 ?>
 
@@ -43,7 +45,7 @@ use yii\helpers\Url;
 
     <div class="form-group">
         <div class="col-md-3">
-            <?= $form->field($model, 'sex')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'sex')->dropDownList(['ชาย'=>'ชาย','หญิง'=>'หญิง']) ?>
         </div>
         <div class="col-md-3">
             <?=
@@ -68,10 +70,12 @@ use yii\helpers\Url;
             ?>
         </div>
         <div class="col-md-3">
+            <?php
+            $mDistrict = CAmpur::find()->where(['changwatcode'=>$model->province])->all();
+            $items = ArrayHelper::map($mDistrict, 'ampurcodefull','ampurname');
+            ?>
             <?=
-            $form->field($model, 'district')->dropDownList([],[
-                'prompt'=>'เลือก'
-            ]);
+            $form->field($model, 'district')->dropDownList($items);
             ?>
         </div>
 
@@ -79,7 +83,11 @@ use yii\helpers\Url;
 
     <div class="form-group">
         <div class="col-md-3">
-            <?= $form->field($model, 'subdistrict')->textInput(['maxlength' => true]) ?>
+            <?php
+            $mSubDistrict = CTambon::find()->where(['ampurcode'=>$model->district])->all();
+            $items = ArrayHelper::map($mSubDistrict, 'tamboncodefull','tambonname');
+            ?>
+            <?= $form->field($model, 'subdistrict')->dropDownList($items); ?>
         </div>
         <div class="col-md-3">
             <?= $form->field($model, 'village_no')->textInput(['maxlength' => true]) ?>
@@ -133,25 +141,44 @@ use yii\helpers\Url;
 </div>
 <?php
 $route_get_amp = Url::toRoute('ajax/getamp');
+$route_get_tmb = Url::toRoute('ajax/gettmb');
+
 $js = <<<JS
         
 $('#patient-province').change(function(){
    $('#patient-district').empty()
    $('#patient-district').append($('<option>').text('เลือก').attr('value',''));
-    var p=$(this).val();
+    var q=$(this).val();
     $.ajax({
         url:'$route_get_amp',
         type:'POST',
-        data: 'q=' + p,
+        data: 'q=' + q,
         dataType: 'json',
         success: function( json ) {
             $.each(json, function(code, value) {
                 $('#patient-district').append($('<option>').text(value).attr('value', code));
             });
         }
-    });
-    
+    });   
   
+});
+        
+$('#patient-district').change(function(){
+   $('#patient-subdistrict').empty()
+   $('#patient-subdistrict').append($('<option>').text('เลือก').attr('value',''));
+   var q=$(this).val();
+   $.ajax({
+        url:'$route_get_tmb',
+        type:'POST',
+        data: 'q=' + q,
+        dataType: 'json',
+        success: function( json ) {
+            $.each(json, function(code, value) {
+                $('#patient-subdistrict').append($('<option>').text(value).attr('value', code));
+            });
+        }
+    });   
+    
 });
   
 
