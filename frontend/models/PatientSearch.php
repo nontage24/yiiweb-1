@@ -15,13 +15,12 @@ class PatientSearch extends Patient {
     /**
      * @inheritdoc
      */
-    //public $cchangwat;
 
     public function rules() {
         return [
             [['id', 'age_y', 'typearea', 'cm_id', 'cg_id', 'adl', 'class_id'], 'integer'],
             [['cid', 'prename', 'name', 'lname', 'sex', 'birth', 'province', 'district', 'subdistrict', 'village_no', 'village_name', 'house_no', 'lat', 'lon', 'nation', 'race', 'religion', 'mstatus', 'hospcode', 'pid', 'refer_from', 'disease', 'discharge', 'tai', 'class_name', 'color', 'cousin', 'tel', 'dupdate'], 'safe'],
-            //[['cchangwat'], 'safe']
+           
         ];
     }
 
@@ -42,7 +41,6 @@ class PatientSearch extends Patient {
      */
     public function search($params) {
         $query = Patient::find();
-        //$query->joinWith(['cchangwat']);
 
         // add conditions that should always apply here
 
