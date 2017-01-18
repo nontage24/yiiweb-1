@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use kartik\grid\GridView;
 use frontend\models\CChangwat;
 use yii\helpers\ArrayHelper;
+use yii\bootstrap\Modal;
 
 
 /* @var $this yii\web\View */
@@ -20,6 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?= Html::a('<i class="glyphicon glyphicon-plus"></i> เพิ่ม', ['create'], ['class' => 'btn btn-success']) ?>
+       
     </p>
     <?=
     GridView::widget([
@@ -92,3 +94,4 @@ $this->params['breadcrumbs'][] = $this->title;
     ]);
     ?>
 </div>
+
