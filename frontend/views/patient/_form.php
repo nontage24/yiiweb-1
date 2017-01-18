@@ -144,7 +144,8 @@ $route_get_amp = Url::toRoute('ajax/getamp');
 $route_get_tmb = Url::toRoute('ajax/gettmb');
 
 $js = <<<JS
-        
+ 
+//ดึงอำเภอ
 $('#patient-province').change(function(){
    $('#patient-district').empty()
    $('#patient-district').append($('<option>').text('เลือก').attr('value',''));
@@ -162,7 +163,8 @@ $('#patient-province').change(function(){
     });   
   
 });
-        
+
+//ดึงตำบล
 $('#patient-district').change(function(){
    $('#patient-subdistrict').empty()
    $('#patient-subdistrict').append($('<option>').text('เลือก').attr('value',''));
@@ -179,8 +181,7 @@ $('#patient-district').change(function(){
         }
     });   
     
-});
-  
+});  
 
  
 JS;
