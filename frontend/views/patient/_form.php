@@ -6,6 +6,8 @@ use yii\helpers\ArrayHelper;
 use frontend\models\CPrename;
 use kartik\widgets\Select2;
 use kartik\date\DatePicker;
+use frontend\models\CChangwat;
+use yii\helpers\Url;
 ?>
 
 <div class="patient-form">
@@ -50,16 +52,27 @@ use kartik\date\DatePicker;
                     'autoclose' => true,
                     'format' => 'yyyy-mm-dd'
                 ],
-                 'language' => 'th',
-                 
+                'language' => 'th',
             ])
             ?>
         </div>
         <div class="col-md-3">
-            <?= $form->field($model, 'province')->textInput(['maxlength' => true]) ?>
+            <?php
+            $mChangwat = CChangwat::find()->all();
+            $items = ArrayHelper::map($mChangwat, 'changwatcode', 'changwatname');
+            ?>
+            <?=
+            $form->field($model, 'province')->widget(Select2::className(), [
+                'data' => $items
+            ])
+            ?>
         </div>
         <div class="col-md-3">
-<?= $form->field($model, 'district')->textInput(['maxlength' => true]) ?>
+            <?=
+            $form->field($model, 'district')->dropDownList([],[
+                'prompt'=>'เลือก'
+            ]);
+            ?>
         </div>
 
     </div>
@@ -118,3 +131,30 @@ use kartik\date\DatePicker;
 <?php ActiveForm::end(); ?>
 
 </div>
+<?php
+$route_get_amp = Url::toRoute('ajax/getamp');
+$js = <<<JS
+$('#patient-province').change(function(){
+   $('#patient-district').empty()
+   $('#patient-district').append($('<option>').text('เลือก').attr('value',''));
+    var p=$(this).val();
+    $.ajax({
+        url:'$route_get_amp'+'&q='+p,
+        type:'POST',
+        //data: '&q=' + p,
+        dataType: 'json',
+        success: function( json ) {
+            $.each(json, function(code, value) {
+                $('#patient-district').append($('<option>').text(value).attr('value', code));
+            });
+        }
+    });
+    
+  
+});
+  
+
+ 
+JS;
+$this->registerJs($js);
+?>
