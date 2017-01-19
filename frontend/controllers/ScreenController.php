@@ -21,7 +21,7 @@ class ScreenController extends \yii\web\Controller
             
             if($model->save()){
                 \Yii::$app->session->setFlash('success', 'บันทึกสำเร็จ');
-                $this->redirect(['patient/index']);
+                return $this->redirect(['patient/index']);
             }
                     
         }

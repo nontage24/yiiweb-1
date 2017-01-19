@@ -3,6 +3,7 @@
 namespace frontend\models;
 
 use Yii;
+use frontend\models\Patient;
 
 /**
  * This is the model class for table "screen".
@@ -14,21 +15,19 @@ use Yii;
  * @property string $adl_group
  * @property string $q2
  */
-class Screen extends \yii\db\ActiveRecord
-{
+class Screen extends \yii\db\ActiveRecord {
+
     /**
      * @inheritdoc
      */
-    public static function tableName()
-    {
+    public static function tableName() {
         return 'screen';
     }
 
     /**
      * @inheritdoc
      */
-    public function rules()
-    {
+    public function rules() {
         return [
             [['patient_id', 'adl'], 'integer'],
             [['date_screen'], 'safe'],
@@ -39,8 +38,7 @@ class Screen extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
-    public function attributeLabels()
-    {
+    public function attributeLabels() {
         return [
             'id' => 'ID',
             'patient_id' => 'Patient ID',
@@ -50,4 +48,18 @@ class Screen extends \yii\db\ActiveRecord
             'q2' => 'Q2',
         ];
     }
+
+    public function beforeSave($insert) {
+        if (parent::beforeSave($insert)) {
+            
+            $pt = Patient::findOne($this->patient_id);
+            $pt->adl=  $this->adl;
+            $pt->update();
+
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }
