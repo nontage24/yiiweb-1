@@ -35,7 +35,13 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
             //'id',
-            'cid',
+            [
+                'attribute'=>'cid',
+                'format'=>'raw',
+                'value'=>function($model){
+                    return Html::a($model->cid,['patient/view','id'=>$model->id]);
+                }
+            ],
             'prename',
             'name',
             'lname',

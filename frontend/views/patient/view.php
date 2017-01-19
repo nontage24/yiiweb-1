@@ -23,6 +23,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 'method' => 'post',
             ],
         ]) ?>
+        
+        <?= Html::a('ประเมิน', ['screen/index', 'id' => $model->id], ['class' => 'btn btn-warning']) ?>
     </p>
     
     <table border="1">
