@@ -1,0 +1,53 @@
+<?php
+
+namespace frontend\models;
+
+use Yii;
+
+/**
+ * This is the model class for table "screen".
+ *
+ * @property integer $id
+ * @property integer $patient_id
+ * @property string $date_screen
+ * @property integer $adl
+ * @property string $adl_group
+ * @property string $q2
+ */
+class Screen extends \yii\db\ActiveRecord
+{
+    /**
+     * @inheritdoc
+     */
+    public static function tableName()
+    {
+        return 'screen';
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function rules()
+    {
+        return [
+            [['patient_id', 'adl'], 'integer'],
+            [['date_screen'], 'safe'],
+            [['adl_group', 'q2'], 'string'],
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID',
+            'patient_id' => 'Patient ID',
+            'date_screen' => 'Date Screen',
+            'adl' => 'Adl',
+            'adl_group' => 'Adl Group',
+            'q2' => 'Q2',
+        ];
+    }
+}
