@@ -50,12 +50,10 @@ class Screen extends \yii\db\ActiveRecord {
     }
 
     public function beforeSave($insert) {
-        if (parent::beforeSave($insert)) {
-            
+        if (parent::beforeSave($insert)) {            
             $pt = Patient::findOne($this->patient_id);
             $pt->adl=  $this->adl;
             $pt->update();
-
             return true;
         } else {
             return false;
