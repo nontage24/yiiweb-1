@@ -24,6 +24,12 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]) ?>
     </p>
+    
+    <table border="1">
+        <tr>
+            <td>ชื่อ</td><td><?=$model->name?></td>
+        </tr>
+    </table>
 
     <?= DetailView::widget([
         'model' => $model,

@@ -39,7 +39,12 @@ $this->params['breadcrumbs'][] = $this->title;
             'prename',
             'name',
             'lname',
-            //'sex:text:เพศ',
+            [
+               'attribute'=>'sex',
+               'filter'=>  ['ชาย'=>'ชาย','หญิง'=>'หญิง'],
+                 'group'=>true,
+                
+            ],
             [
                 'attribute' => 'birth',
                 'filterType' => GridView::FILTER_DATE,
@@ -61,6 +66,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
                 'filterInputOptions' => ['placeholder' => ''],
                 'headerOptions' => ['style' => 'width:20%'],
+                 'group'=>true,
             ],
             // 'district',
             // 'subdistrict',

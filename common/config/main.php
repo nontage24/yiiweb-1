@@ -12,4 +12,5 @@ return [
             'class' => '\kartik\grid\Module'
         ]
     ],
+    'language' =>'th'
 ];

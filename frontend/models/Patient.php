@@ -64,10 +64,14 @@ class Patient extends \yii\db\ActiveRecord
             [['birth', 'dupdate'], 'safe'],
             [['age_y', 'typearea', 'cm_id', 'cg_id', 'adl', 'class_id'], 'integer'],
             [['cousin'], 'string'],
-            [['cid'], 'string', 'max' => 13],
+            [['cid'], 'string', 'max' => 13,'min'=>13,'message'=>''],
             [['prename', 'name', 'lname', 'province', 'district', 'subdistrict', 'village_no', 'village_name', 'house_no', 'lat', 'lon', 'nation', 'race', 'religion', 'mstatus', 'pid', 'refer_from', 'disease', 'discharge', 'tai', 'class_name', 'color', 'tel'], 'string', 'max' => 255],
             [['sex'], 'string', 'max' => 4],
             [['hospcode'], 'string', 'max' => 5],
+            [['cid','name','lname','birth'],'required','message'=>''],
+            [['cid'],'unique']
+          
+            
         ];
     }
 
@@ -116,8 +120,8 @@ class Patient extends \yii\db\ActiveRecord
         ];
     }
     
-     public function getCchangwat(){
-        return $this->hasOne(CChangwat::className(), ['changwatcode' => 'province']);
+    public function getCchangwat(){
+      return $this->hasOne(CChangwat::className(), ['changwatcode' => 'province']);
         
     }
 }
