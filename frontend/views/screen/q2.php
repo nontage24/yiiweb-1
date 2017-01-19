@@ -35,6 +35,16 @@
         </tr>
     </tbody>
 </table>
+
+<div>
+    <form method="POST">
+        ADL= <input type="text" id="adl" name="adl" />
+        <br>
+        2Q= <input type="text" id="q2" name="q2" />
+        <button type="submit"> บันทึก </button> 
+    </form>    
+</div>
+
 <?php
 $this->registerJs($this->render('q2.js'));
 ?>
